@@ -1,3 +1,4 @@
+import React from 'react';
 import main from '../assets/images/main-alternative.svg'
 import Wrapper from '../assets/wrappers/LandingPage.js';
 import { Logo } from '../components';

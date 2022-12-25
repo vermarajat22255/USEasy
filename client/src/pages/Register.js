@@ -13,7 +13,7 @@ const initialState = {
 const Register = () => {
     const [ value, setValue ] = useState( initialState );
     // use globalState and useNavigate
-    const { showAlert, isLoading, displayAlert, clearAlert } = useAppContext();
+    const { showAlert, isLoading, displayAlert, clearAlert, registerUser } = useAppContext();
 
     const toggleMember = () => {
         setValue( { ...value, isMember: !value.isMember } )
@@ -37,7 +37,7 @@ const Register = () => {
         }
         else {
             console.log( " Loking for register function ...." );
-            // registerUser( currentUser )
+            registerUser( currentUser )
         }
     }
     return (

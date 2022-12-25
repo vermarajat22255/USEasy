@@ -4,11 +4,10 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 const UserSchema = new mongoose.Schema( {
-    name: {
+    username: {
         type: String,
         required: [ true, ' Please provide name' ],
         minlength: 3,
-        maxlength: 20,
         trim: true
     },
     email: {
@@ -29,7 +28,8 @@ const UserSchema = new mongoose.Schema( {
     },
     lastname: {
         type: String,
-        required: [ true, ' Please provide last name' ]
+        required: [ false, ' Please provide last name' ],
+        default: ''
     },
     location: {
         type: String,
