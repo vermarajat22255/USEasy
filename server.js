@@ -2,6 +2,9 @@ import express from 'express';
 // Importing async-error-package catches the error automatically without try-catch
 import 'express-async-errors'
 
+// logging middleware
+import morgan from 'morgan';
+
 //db and authenticate
 import connectDB from './db/connect.js';
 
@@ -19,6 +22,9 @@ dotenv.config();
 const app = express();
 
 // We use express.json() to access the json body parameters in the request
+if ( process.env.NODE_ENV !== 'production' ) {
+    app.use( morgan( 'dev' ) )
+}
 app.use( express.json() )
 const port = process.env.PORT || 5000;
 

@@ -1,8 +1,9 @@
 import React from 'react'
-import { state, useState } from 'react';
+import { state, useState, useEffect } from 'react';
 import Wrapper from '../assets/wrappers/RegisterPage';
 import { Logo, FormRow, Alert } from '../components';
 import { useAppContext } from '../context/appContext';
+import { useNavigate } from 'react-router-dom'
 const initialState = {
     username: '',
     email: '',
@@ -11,9 +12,9 @@ const initialState = {
 }
 
 const Register = () => {
+    const navigate = useNavigate()
     const [ value, setValue ] = useState( initialState );
-    // use globalState and useNavigate
-    const { showAlert, isLoading, displayAlert, clearAlert, registerUser } = useAppContext();
+    const { user, showAlert, isLoading, displayAlert, clearAlert, registerUser, loginUser, setupUser } = useAppContext();
 
     const toggleMember = () => {
         setValue( { ...value, isMember: !value.isMember } )
@@ -33,13 +34,21 @@ const Register = () => {
         console.log( 'Input values are - ', value );
         const currentUser = { username, email, password }
         if ( isMember ) {
-            console.log( "Already a member" )
+            console.log( "Already a member, login." )
+            setupUser( { currentUser, endPoint: '/login', alertText: 'Login Success, Redirecting..!' } )
         }
         else {
-            console.log( " Loking for register function ...." );
-            registerUser( currentUser )
+            console.log( " Not a member, register a new user." );
+            setupUser( { currentUser, endPoint: '/register', alertText: 'Regiter Success, redirecting...!' } )
         }
     }
+    useEffect( () => {
+        if ( user ) {
+            setTimeout( () => {
+                navigate( '/' )
+            }, 3000 );
+        }
+    }, [ user, navigate ] )
     return (
         <Wrapper className="full-page">
             <form className='form' onSubmit={ onSubmit }>
