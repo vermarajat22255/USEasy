@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
-
+import Blog from './blog/Blog.js'
 const Dashboard = () => {
 
     return (
-        <h1>
-            DashBoard Page..
-        </h1>
+        <Blog></Blog>
     )
 }
 export default Dashboard
